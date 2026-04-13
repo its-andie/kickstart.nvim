@@ -273,6 +273,7 @@ require('lazy').setup({
   -- options to `gitsigns.nvim`.
   --
   -- See `:help gitsigns` to understand what the configuration keys do
+
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     ---@module 'gitsigns'
@@ -556,6 +557,15 @@ require('lazy').setup({
           --  For example, in C this would take you to the header.
           map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
+          ------NEW ADDITION----- FIND WHERE USED FUNCTIONS and WORDS
+          ---
+          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D}ocument [S]ymbols')
+
+          map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+
+          --- HOVER DOCUMENTATION ME ADDED
+          map('K', vim.lsp.buf.hover, 'Hover Documentation')
+
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
           --    See `:help CursorHold` for information about when this is executed
@@ -603,7 +613,7 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
-        -- rust_analyzer = {},
+        rust_analyzer = {},
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
@@ -696,6 +706,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        rust = { 'rustfmt', lsp_format = 'fallback' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -940,7 +951,7 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
