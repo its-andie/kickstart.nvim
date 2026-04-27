@@ -230,6 +230,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.hl.on_yank() end,
 })
 
+vim.pack.add {
+  'https://github.com/aznhe21/actions-preview.nvim',
+}
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -329,6 +333,14 @@ require('lazy').setup({
     },
   },
 
+  --  require("actions-preview").setup {
+  --    backend = { "telescope" },
+  --    extensions = { "env" },
+  --    telescope = vim.tbl_extend(
+  --      "force",
+  --        require("telescope.themes").get_dropdown(), {}
+  --    )
+  --  }
   -- NOTE: Plugins can specify dependencies.
   --
   -- The dependencies are proper plugin specifications as well - anything
@@ -393,7 +405,18 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
+        defaults = {
+          preview = { treesitter = true },
+          color_devicons = true,
+          sorting_strategy = 'ascending',
+          path_displays = { 'smart' },
+          layout_config = {
+            height = 100,
+            width = 400,
+            prompt_position = 'top',
+            preview_cutoff = 40,
+          },
+        },
         --   mappings = {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
@@ -614,9 +637,9 @@ require('lazy').setup({
       --  See `:help lsp-config` for information about keys and how to configure
       ---@type table<string, vim.lsp.Config>
       local servers = {
-        clangd = {
-          mason = false,
-        },
+        --   clangd = {
+        --     mason = false,
+        --   },
         -- gopls = {},
         -- pyright = {},
         rust_analyzer = {},
@@ -833,7 +856,7 @@ require('lazy').setup({
   -- Load the colorscheme here.
   -- Like many other themes, this one has different styles, and you could load
   -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  --      vim.cmd.colorscheme 'tokyonight-night'
+  -- vim.cmd.colorscheme 'kanagawa-dragon',
   --    end,
   --  },
 
@@ -952,7 +975,6 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommended keymaps
-
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
