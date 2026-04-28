@@ -232,10 +232,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.pack.add {
   'https://github.com/aznhe21/actions-preview.nvim',
-  'https://github.com/vague2k/vague.nvim',
 }
-
-vim.cmd.colorscheme 'vague'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
